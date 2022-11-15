@@ -9,7 +9,7 @@ const getRndInt = (min, max) => {
 class App extends Component {
   state = {
     circles: [1, 2, 3, 4],
-    current: 0,
+    current: "",
     score: 0,
     pace: 1000,
   };
@@ -27,7 +27,7 @@ class App extends Component {
     } while (nextActive === this.state.current);
     this.setState({
       current: nextActive,
-      pace: this.state.pace*0.95
+      pace: this.state.pace - 10,
     });
     console.log(this.state.current);
     this.timer = setTimeout(this.nextCircle, this.state.pace);
@@ -49,7 +49,12 @@ class App extends Component {
           </h4>
           <div className="balls">
             {this.state.circles.map((circle, i) => (
-              <Circle key={i} id={i + 1} click={() => this.clickHandler(i)} />
+              <Circle
+                key={i}
+                id={i + 1}
+                click={() => this.clickHandler(i)}
+                active={this.state.current === i}
+              />
             ))}
           </div>
           <button onClick={this.startHandler} className="startBtn">
