@@ -1,0 +1,8 @@
+.circle{
+  border-radius: 50%;
+  width: 138px;
+  height: 142px;
+  background: #4db6a5;
+  margin: 1em;
+  cursor: pointer; 
+}
