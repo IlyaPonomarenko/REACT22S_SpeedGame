@@ -4,7 +4,7 @@ const GameOver = (props) =>{
         <div className="overlay">
         <div className="modal">
           <h2>You lost!</h2>
-          <p>{props.finalscore}</p>
+          <p>Your final score: {props.finalscore}</p>
           <button className="btn close" onClick={props.close}>Close</button>
         </div>
       </div>
