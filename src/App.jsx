@@ -2,11 +2,11 @@ import Circle from "./Circle";
 import GameOver from "./GameOver";
 import "./App.css";
 import { Component } from "react";
-import sound from "./assets/sounds/mixkit-cool-interface-click-tone-2568.wav"
+import sound from "./assets/sounds/mixkit-cool-interface-click-tone-2568.wav";
 const getRndInt = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
-let clickSound = new Audio(sound)
+let clickSound = new Audio(sound);
 class App extends Component {
   state = {
     circles: [1, 2, 3, 4],
@@ -14,13 +14,15 @@ class App extends Component {
     score: 0,
     pace: 1000,
     gameover: false,
-    rounds:0,
+    isGameStarted: false,
+    isGameGoing: true,
+    rounds: 0,
   };
   timer;
-  clickPlay = () =>{
-    if (clickSound.paused){
-      clickSound.play()
-    }else{
+  clickPlay = () => {
+    if (clickSound.paused) {
+      clickSound.play();
+    } else {
       clickSound.currentTime = 0;
     }
   };
@@ -29,7 +31,7 @@ class App extends Component {
       this.endHandler();
       return;
     }
-   this.clickPlay()
+    this.clickPlay();
     this.setState({
       score: this.state.score + 1,
       rounds: this.state.rounds - 1,
@@ -37,7 +39,7 @@ class App extends Component {
   };
 
   nextCircle = () => {
-    if(this.state.rounds >= 3){
+    if (this.state.rounds >= 3) {
       this.endHandler();
       return;
     }
@@ -55,6 +57,12 @@ class App extends Component {
 
   startHandler = () => {
     this.nextCircle();
+    this.setState({
+      isGameStarted: true,
+    });
+    this.setState({
+      isGameGoing: false,
+    });
   };
   endHandler = () => {
     clearTimeout(this.timer);
@@ -86,13 +94,17 @@ class App extends Component {
               />
             ))}
           </div>
+          {this.state.isGameStarted && (
+            <button onClick={this.endHandler} className="endBtn">
+              End game
+            </button>
+          )}
+          {this.state.isGameGoing && (
+            <button onClick={this.startHandler} className="startBtn">
+              Start game
+            </button>
+          )}
 
-          <button onClick={this.startHandler} className="startBtn">
-            Start game
-          </button>
-          <button onClick={this.endHandler} className="endBtn">
-            End game
-          </button>
           {this.state.gameover && (
             <GameOver finalscore={this.state.score} close={this.closeHandler} />
           )}

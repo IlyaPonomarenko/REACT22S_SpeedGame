@@ -9,4 +9,5 @@
 .active {
     background: #bbdd3e;
     box-shadow: 10px 5px 30px #ffffff55;
+    content: url("./assets/img/bonus_more_lembas_bread.png");
   }
