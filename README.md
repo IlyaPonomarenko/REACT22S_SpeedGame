@@ -1,4 +1,4 @@
-# Speed game
+# Speed game - Gather Lembas bread!
 
 ## Preview of the app 
 ![Alt text](./src/assets/img/preview.png "Optional title")
